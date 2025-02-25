@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import TodoForm from "./Components/Pages/TodoForm/TodoForm";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container mx-auto py-6 px-4 min-h-screen flex flex-col items-center">
+
+      <div className="w-full max-w-xl">
+        <div className="flex justify-between items-center">
+          <h1 className="text-4xl font-extrabold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
+            Todos
+          </h1>
+
+          <button className="btn btn-md text-white bg-gradient-to-r from-blue-500 to-purple-500 shadow-md hover:scale-105 transition-transform" onClick={() => setIsOpen(true)}>
+            Add Todo
+          </button>
+
+
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      {/* Todo Form Modal */}
+      {
+        isOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+            <TodoForm closeModal={() => setIsOpen(false)} />
+          </div>
+        )
+      }
+      {/* Todo Form Modal */}
+
+
+    </div>
+  );
 }
 
-export default App
+export default App;
